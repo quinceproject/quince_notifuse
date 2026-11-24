@@ -1,0 +1,11 @@
+[{shop_name}] Sending to Notifuse is failing
+
+{count} entries could not be delivered after {attempts} attempts.
+
+Last response from {endpoint}:
+{error}
+
+Nothing is lost: the entries stay in the log. Open Quince project → Notifuse → Log
+in your back office to see them and send them again once Notifuse is back.
+
+This message is sent at most once a day while the problem lasts.

@@ -1,0 +1,16 @@
+services:
+  _defaults:
+    public: true
+
+    # Obowiązkowe w każdym naszym module: PrestaShop rozpoznaje kontrolery modułów
+    # wyrażeniem regularnym po treści pliku (`extends FrameworkBundleAdminController`),
+    # a nasze dziedziczą po klasie silnika, więc tagi deklarujemy sami.
+    autoconfigure: true
+    autowire: true
+    tags: ['controller.service_arguments']
+
+  Quince\Notifuse\Controller\Admin\SettingsController:
+    class: Quince\Notifuse\Controller\Admin\SettingsController
+
+  Quince\Notifuse\Controller\Admin\LogController:
+    class: Quince\Notifuse\Controller\Admin\LogController

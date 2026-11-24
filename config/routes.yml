@@ -1,0 +1,57 @@
+# Ekran modułu w panelu silnika.
+#
+# _legacy_controller wskazuje własną zakładkę modułu (`AdminQuinceNotifuse`). Do niej
+# odnoszą się uprawnienia pracownika: atrybuty `#[AdminSecurity]` w kontrolerach
+# sprawdzają prawa do tej zakładki.
+
+quince_notifuse_settings:
+  path: quince/notifuse
+  methods: [GET]
+  defaults:
+    _controller: Quince\Notifuse\Controller\Admin\SettingsController::indexAction
+    _legacy_controller: 'AdminQuinceNotifuse'
+    _legacy_link: 'AdminQuince'
+
+quince_notifuse_save:
+  path: quince/notifuse/save
+  methods: [POST]
+  defaults:
+    _controller: Quince\Notifuse\Controller\Admin\SettingsController::saveAction
+    _legacy_controller: 'AdminQuinceNotifuse'
+    _legacy_link: 'AdminQuince'
+
+quince_notifuse_test_event:
+  path: quince/notifuse/test-event
+  methods: [POST]
+  defaults:
+    _controller: Quince\Notifuse\Controller\Admin\SettingsController::testEventAction
+    _legacy_controller: 'AdminQuinceNotifuse'
+    _legacy_link: 'AdminQuince'
+
+quince_notifuse_log:
+  path: quince/notifuse/log
+  methods: [GET]
+  defaults:
+    _controller: Quince\Notifuse\Controller\Admin\LogController::indexAction
+    _legacy_controller: 'AdminQuinceNotifuse'
+    _legacy_link: 'AdminQuince'
+
+quince_notifuse_log_entry:
+  path: quince/notifuse/log/{id}
+  methods: [GET]
+  requirements:
+    id: '\d+'
+  defaults:
+    _controller: Quince\Notifuse\Controller\Admin\LogController::entryAction
+    _legacy_controller: 'AdminQuinceNotifuse'
+    _legacy_link: 'AdminQuince'
+
+quince_notifuse_log_retry:
+  path: quince/notifuse/log/{id}/retry
+  methods: [POST]
+  requirements:
+    id: '\d+'
+  defaults:
+    _controller: Quince\Notifuse\Controller\Admin\LogController::retryAction
+    _legacy_controller: 'AdminQuinceNotifuse'
+    _legacy_link: 'AdminQuince'

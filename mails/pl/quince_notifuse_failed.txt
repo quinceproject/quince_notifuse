@@ -1,0 +1,11 @@
+[{shop_name}] Wysyłanie do Notifuse nie działa
+
+Wpisów, których nie udało się dostarczyć po {attempts} próbach: {count}.
+
+Ostatnia odpowiedź z {endpoint}:
+{error}
+
+Nic nie przepadło: wpisy zostają w dzienniku. Otwórz Quince project → Notifuse → Dziennik
+w panelu sklepu, żeby je zobaczyć i wysłać ponownie, gdy Notifuse znów zacznie działać.
+
+Ta wiadomość przychodzi najwyżej raz dziennie, dopóki problem trwa.

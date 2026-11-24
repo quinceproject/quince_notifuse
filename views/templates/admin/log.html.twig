@@ -1,0 +1,140 @@
+{# Dziennik wysyłki do Notifuse. Wzór: dziennik quince_events. #}
+{% extends '@Modules/quince_engine/views/templates/admin/layout.html.twig' %}
+{% import '@Modules/quince_engine/views/templates/admin/_macros/icons.html.twig' as icons %}
+
+{% trans_default_domain 'Modules.Quincenotifuse.Admin' %}
+
+{% set rodzaje = { 'contact': 'Contact'|trans, 'subscribe': 'List sign-up'|trans, 'list_status': 'List status'|trans, 'event': 'Event'|trans } %}
+{% set badge = { 'pending': 'qc-badge-warning', 'sent': 'qc-badge-success', 'failed': 'qc-badge-danger' } %}
+{% set stany = { 'pending': 'Waiting'|trans, 'sent': 'Sent'|trans, 'failed': 'Failed'|trans } %}
+
+{% block quince_body %}
+<div class="qc-stack">
+
+    <div style="display:flex; gap:16px; flex-wrap:wrap">
+        <div class="qc-card" style="flex:1; min-width:160px">
+            <div class="qc-card-body">
+                <div class="qc-muted" style="margin-bottom:4px">{{ 'Waiting to send'|trans }}</div>
+                <div class="qc-stat">{{ licznik.pending }}</div>
+            </div>
+        </div>
+        <div class="qc-card" style="flex:1; min-width:160px">
+            <div class="qc-card-body">
+                <div class="qc-muted" style="margin-bottom:4px">{{ 'Sent'|trans }}</div>
+                <div class="qc-stat">{{ licznik.sent }}</div>
+            </div>
+        </div>
+        <div class="qc-card" style="flex:1; min-width:160px">
+            <div class="qc-card-body">
+                <div class="qc-muted" style="margin-bottom:4px">{{ 'Failed'|trans }}</div>
+                <div class="qc-stat"{{ licznik.failed > 0 ? ' style="color:var(--danger)"' }}>{{ licznik.failed }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="qc-card">
+        <div class="qc-card-body">
+            <form method="get" action="{{ path('quince_notifuse_log') }}" style="display:flex; gap:8px; flex-wrap:wrap; align-items:flex-end">
+                <div class="qc-field" style="max-inline-size:220px">
+                    <label class="qc-label" for="q-l-label">{{ 'What'|trans }}</label>
+                    <div class="qc-select-wrap">
+                        <select id="q-l-label" name="label" class="qc-field-base qc-select qc-focusable">
+                            <option value="">{{ 'All'|trans }}</option>
+                            {% for e in etykiety %}
+                                <option value="{{ e }}"{{ filtry.label == e ? ' selected' }}>{{ e }}</option>
+                            {% endfor %}
+                        </select>
+                        {{ icons.icon('chevronDown', 14, 'qc-select-chevron') }}
+                    </div>
+                </div>
+                <div class="qc-field" style="max-inline-size:180px">
+                    <label class="qc-label" for="q-l-status">{{ 'Status'|trans }}</label>
+                    <div class="qc-select-wrap">
+                        <select id="q-l-status" name="status" class="qc-field-base qc-select qc-focusable">
+                            <option value="">{{ 'All'|trans }}</option>
+                            {% for kod, nazwa in stany %}
+                                <option value="{{ kod }}"{{ filtry.status == kod ? ' selected' }}>{{ nazwa }}</option>
+                            {% endfor %}
+                        </select>
+                        {{ icons.icon('chevronDown', 14, 'qc-select-chevron') }}
+                    </div>
+                </div>
+                <div class="qc-field" style="max-inline-size:220px">
+                    <label class="qc-label" for="q-l-email">{{ 'Email'|trans }}</label>
+                    <input type="text" class="qc-field-base qc-focusable" id="q-l-email" name="email" value="{{ filtry.email }}" placeholder="{{ 'Email…'|trans }}">
+                </div>
+                <div class="qc-field" style="max-inline-size:160px">
+                    <label class="qc-label" for="q-l-from">{{ 'From'|trans }}</label>
+                    <input type="date" class="qc-field-base qc-focusable" id="q-l-from" name="from" value="{{ filtry.from }}">
+                </div>
+                <div class="qc-field" style="max-inline-size:160px">
+                    <label class="qc-label" for="q-l-to">{{ 'To'|trans }}</label>
+                    <input type="date" class="qc-field-base qc-focusable" id="q-l-to" name="to" value="{{ filtry.to }}">
+                </div>
+                <button type="submit" class="qc-btn qc-btn-outline">{{ icons.icon('search', 14) }} {{ 'Filter'|trans }}</button>
+                <a href="{{ path('quince_notifuse_log') }}" class="qc-btn qc-btn-text">{{ 'Clear'|trans }}</a>
+            </form>
+        </div>
+    </div>
+
+    <div class="qc-table-wrap">
+        {% if wpisy %}
+            <table class="qc-table">
+                <thead>
+                    <tr>
+                        <th>{{ 'What'|trans }}</th>
+                        <th>{{ 'Contact'|trans }}</th>
+                        <th>{{ 'When'|trans }}</th>
+                        <th>{{ 'Status'|trans }}</th>
+                        <th>{{ 'Attempts'|trans }}</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for w in wpisy %}
+                        <tr>
+                            <td>{{ rodzaje[w.kind]|default(w.kind) }}<div class="qc-muted"><code>{{ w.label }}</code></div></td>
+                            <td>{{ w.email }}</td>
+                            <td>{{ w.date_add|date('Y-m-d H:i') }}</td>
+                            <td><span class="qc-badge {{ badge[w.status] }}">{{ stany[w.status] }}</span></td>
+                            <td>{{ w.attempts }}</td>
+                            <td>
+                                <div class="qc-row-actions">
+                                    <a href="{{ path('quince_notifuse_log_entry', {id: w.id_quince_notifuse_outbox}) }}" class="qc-btn qc-btn-sm qc-btn-outline">{{ 'Details'|trans }}</a>
+                                    {% if w.status != 'sent' %}
+                                        <form method="post" action="{{ path('quince_notifuse_log_retry', {id: w.id_quince_notifuse_outbox}) }}">
+                                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('quince_notifuse_log_retry') }}">
+                                            <button type="submit" class="qc-btn qc-btn-sm qc-btn-primary">{{ 'Retry'|trans }}</button>
+                                        </form>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="qc-table-foot">
+                <span class="qc-muted">{{ 'Page %page% of %pages%, %total% entries'|trans({'%page%': strona, '%pages%': stron, '%total%': wszystkich}) }}</span>
+                {% if stron > 1 %}
+                    <div class="qc-pagination">
+                        {% if strona > 1 %}
+                            <a class="qc-page-btn" href="{{ path('quince_notifuse_log', filtry|merge({page: strona - 1})) }}">‹</a>
+                        {% endif %}
+                        {% for numer in max(1, strona - 2)..min(stron, strona + 2) %}
+                            <a class="qc-page-btn{{ numer == strona ? ' qc-active' : '' }}" href="{{ path('quince_notifuse_log', filtry|merge({page: numer})) }}">{{ numer }}</a>
+                        {% endfor %}
+                        {% if strona < stron %}
+                            <a class="qc-page-btn" href="{{ path('quince_notifuse_log', filtry|merge({page: strona + 1})) }}">›</a>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+        {% else %}
+            <div class="qc-empty">
+                {{ icons.icon('file', 36, 'qc-empty-icon') }}
+                <div class="qc-empty-text">{{ 'Nothing matches these filters.'|trans }}</div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

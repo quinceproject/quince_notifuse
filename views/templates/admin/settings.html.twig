@@ -1,0 +1,332 @@
+{# Ekran ustawień Quince Notifuse. Projekt: quince/docs/prototyp/notifuse-panel.html #}
+{% extends '@Modules/quince_engine/views/templates/admin/layout.html.twig' %}
+{% import '@Modules/quince_engine/views/templates/admin/_macros/icons.html.twig' as icons %}
+
+{% trans_default_domain 'Modules.Quincenotifuse.Admin' %}
+
+{% set nazwyZdarzen = {
+    'customer.registered': ['Registration'|trans, 'A customer creates an account in the shop.'|trans],
+    'product.viewed': ['Product viewed'|trans, 'A signed-in customer, or one who came from an email link, opens a product page. After signing in, the shop also sends the products viewed earlier in this browser.'|trans],
+    'cart.updated': ['Added to cart'|trans, 'A signed-in customer, or one who came from an email link, adds a product to the cart.'|trans],
+    'wishlist.added': ['Added to favourites'|trans, 'A signed-in customer adds a product to the favourites list.'|trans],
+    'product.price_dropped': ['Price drop'|trans, 'A product the customer has in favourites or in an open cart gets cheaper. Works with Quince Omnibus.'|trans],
+    'product.back_in_stock': ['Back in stock'|trans, 'A product the customer has in favourites or in an open cart is back in stock. Not sent to customers who signed up for the shop\'s own stock alert.'|trans],
+    'cart.abandoned': ['Abandoned cart'|trans, 'A cart with an email address stays without an order longer than the time below.'|trans],
+    'order.placed': ['Order'|trans, 'A customer places an order in the shop. Stops the cart reminders.'|trans],
+    'order.shipped': ['Order shipped'|trans, 'An order gets a status marked as shipped in the shop. With the tracking number.'|trans],
+} %}
+
+{% block quince_actions_info %}
+    {{ 'Saves the settings of this shop.'|trans }}
+{% endblock %}
+
+{% block quince_actions %}
+    <button type="submit" form="quince-notifuse-settings" class="qc-btn qc-btn-primary">
+        {{ icons.icon('check', 14) }} {{ 'Save'|trans }}
+    </button>
+{% endblock %}
+
+{% block quince_body %}
+
+<form id="quince-notifuse-test-event" method="post" action="{{ path('quince_notifuse_test_event') }}" hidden>
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('quince_notifuse_test_event') }}">
+</form>
+
+<form id="quince-notifuse-settings" method="post" action="{{ path('quince_notifuse_save') }}" class="qc-stack">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('quince_notifuse_save') }}">
+
+    <div class="qc-alert qc-alert-info">
+        {{ icons.icon('info', 18, 'qc-alert-icon') }}
+        <div>{{ 'The shop passes contacts, newsletter sign-ups and events to Notifuse. Automations in Notifuse decide whether a customer gets an email.'|trans }}</div>
+    </div>
+
+    {# ── Połączenie ── #}
+    <div class="qc-card">
+        <div class="qc-card-head">
+            <div>
+                <div class="qc-card-title">{{ 'Connection to Notifuse'|trans }}</div>
+                <div class="qc-card-desc">{{ 'Create the API key in Notifuse under Settings → API Keys, with read and write access to contacts and lists.'|trans }}</div>
+            </div>
+        </div>
+        <div class="qc-card-body qc-stack">
+            <div class="qc-form-grid qc-form-grid-2">
+                <div class="qc-field">
+                    <label class="qc-label" for="q-nf-url">{{ 'Notifuse address'|trans }}</label>
+                    <input type="url" class="qc-field-base qc-focusable" id="q-nf-url" name="URL" value="{{ u.URL }}"
+                           spellcheck="false" autocomplete="off" placeholder="https://notifuse.twojadomena.pl">
+                    <div class="qc-hint">{{ 'The address you sign in to Notifuse at.'|trans }}</div>
+                </div>
+                <div class="qc-field">
+                    <label class="qc-label" for="q-nf-ws">{{ 'Workspace'|trans }}</label>
+                    <input type="text" class="qc-field-base qc-focusable" id="q-nf-ws" name="WORKSPACE" value="{{ u.WORKSPACE }}"
+                           spellcheck="false" autocomplete="off">
+                    <div class="qc-hint">{{ 'The identifier from the Notifuse panel address, after /workspace/.'|trans }}</div>
+                </div>
+            </div>
+
+            <div class="qc-field" style="max-inline-size:620px">
+                <label class="qc-label" for="q-nf-key">{{ 'API key'|trans }}</label>
+                <div style="display:flex; gap:12px; align-items:center">
+                    <input type="password" class="qc-field-base qc-focusable" id="q-nf-key" name="API_KEY" style="flex:1" value=""
+                           placeholder="{{ maKlucz ? '••••••••••••••••••••••••' : 'Not set yet'|trans }}" autocomplete="new-password">
+                    <button type="submit" class="qc-btn qc-btn-outline" style="flex:none">
+                        {{ icons.icon('refresh', 14) }} {{ 'Check the connection'|trans }}
+                    </button>
+                </div>
+                {% if maKlucz %}
+                    <div class="qc-hint">{{ 'Leave it empty to keep the saved key.'|trans }}</div>
+                {% endif %}
+            </div>
+
+            {% if polaczenieUstawione and bladPolaczenia == '' %}
+                <div class="qc-alert qc-alert-success">
+                    {{ icons.icon('checkCircle', 18, 'qc-alert-icon') }}
+                    <div>{{ 'Connected to workspace <strong>%workspace%</strong>.'|trans({'%workspace%': u.WORKSPACE|e})|raw }}</div>
+                </div>
+            {% elseif polaczenieUstawione %}
+                <div class="qc-alert qc-alert-warning">
+                    {{ icons.icon('alertCircle', 18, 'qc-alert-icon') }}
+                    <div>{{ 'Notifuse did not accept the connection: %error%'|trans({'%error%': bladPolaczenia}) }}</div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    {# ── Newsletter ── #}
+    <div class="qc-card">
+        <div class="qc-card-head">
+            <div>
+                <div class="qc-card-title">{{ 'Newsletter'|trans }}</div>
+                <div class="qc-card-desc">{{ 'A customer who signs up in the shop goes to the list in their language. Notifuse sends them an email asking to confirm the sign-up.'|trans }}</div>
+            </div>
+        </div>
+        <div class="qc-card-body qc-stack">
+            {% if listy %}
+                <div class="qc-table-wrap">
+                    <table class="qc-table">
+                        <thead>
+                            <tr>
+                                <th>{{ 'Shop language'|trans }}</th>
+                                <th>{{ 'List in Notifuse'|trans }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for jezyk in jezyki %}
+                                <tr>
+                                    <td>{{ jezyk.name }}</td>
+                                    <td>
+                                        <div class="qc-select-wrap" style="max-inline-size:320px">
+                                            <select name="LISTS[{{ jezyk.id_lang }}]" class="qc-field-base qc-select qc-focusable"
+                                                    aria-label="{{ 'List in Notifuse'|trans }}: {{ jezyk.name }}">
+                                                <option value="">{{ 'Do not sign up'|trans }}</option>
+                                                {% for lista in listy %}
+                                                    <option value="{{ lista.id }}"{{ przypisane[jezyk.id_lang]|default('') == lista.id ? ' selected' }}>{{ lista.name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                            {{ icons.icon('chevronDown', 14, 'qc-select-chevron') }}
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                {% for o in ostrzezenia %}
+                    <div class="qc-alert qc-alert-warning">
+                        {{ icons.icon('alertCircle', 18, 'qc-alert-icon') }}
+                        <div>
+                            {% if o.problem == 'missing' %}
+                                {{ 'List <strong>%list%</strong> no longer exists in Notifuse. Choose another one.'|trans({'%list%': o.name|e})|raw }}
+                            {% else %}
+                                {{ 'List <strong>%list%</strong> does not ask to confirm the sign-up. In Notifuse turn on "Double opt-in" and make the list public.'|trans({'%list%': o.name|e})|raw }}
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+
+                {% if potwierdzenieSklepu %}
+                    <div class="qc-alert qc-alert-warning">
+                        {{ icons.icon('alertCircle', 18, 'qc-alert-icon') }}
+                        <div>{{ 'The shop also asks to confirm the sign-up (Newsletter subscription module, verification email). Turn it off there, or the customer gets two emails.'|trans }}</div>
+                    </div>
+                {% endif %}
+            {% else %}
+                {# Bez połączenia nie ma z czego wybrać: zapisane przypisania zostają nietknięte. #}
+                {% for idLang, idListy in przypisane %}
+                    <input type="hidden" name="LISTS[{{ idLang }}]" value="{{ idListy }}">
+                {% endfor %}
+                <div class="qc-hint" style="margin:0">{{ 'The lists appear here once the shop connects to Notifuse.'|trans }}</div>
+            {% endif %}
+        </div>
+    </div>
+
+    {# ── Odwiedziny ── #}
+    <div class="qc-card">
+        <div class="qc-card-head">
+            <div>
+                <div class="qc-card-title">{{ 'Visits to the shop'|trans }}</div>
+                <div class="qc-card-desc">{{ 'Notifuse records where a customer came from and which pages they went through: for customers from an email link and for signed-in customers.'|trans }}</div>
+            </div>
+        </div>
+        <div class="qc-card-body">
+            <div class="qc-form-grid qc-form-grid-2">
+                <div class="qc-field">
+                    <label class="qc-label">{{ 'Visit tracking'|trans }}</label>
+                    <label class="qc-toggle">
+                        <input type="checkbox" name="TRACKING" value="1"{{ u.TRACKING == '1' ? ' checked' }}>
+                        <span class="qc-toggle-track"></span>
+                        <span class="qc-toggle-text">{{ 'On'|trans }}</span>
+                    </label>
+                    <div class="qc-hint">{{ 'Only for customers who agreed to analytics cookies. In Notifuse turn on Web Analytics, add the shop domain to the allowed ones and turn on identifying customers from email links.'|trans }}</div>
+                </div>
+
+                <div class="qc-field">
+                    <label class="qc-label" for="q-nf-secret">{{ 'Workspace secret'|trans }}</label>
+                    <input type="password" class="qc-field-base qc-focusable" id="q-nf-secret" name="SECRET" value=""
+                           placeholder="{{ maSekret ? '••••••••••••••••••••••••' : 'Not set'|trans }}" autocomplete="new-password">
+                    <div class="qc-hint">{{ 'Without the secret, visits of signed-in customers are recorded without a name. What the customer did in the shop reaches Notifuse anyway.'|trans }}</div>
+                    {% if maSekret %}
+                        <label style="display:flex; align-items:center; gap:6px; font-weight:normal; margin-top:6px">
+                            <input type="checkbox" class="qc-checkbox" name="SECRET_CLEAR" value="1">
+                            <span>{{ 'Remove the saved secret'|trans }}</span>
+                        </label>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# ── Zdarzenia ── #}
+    <div class="qc-card">
+        <div class="qc-card-head">
+            <div>
+                <div class="qc-card-title">{{ 'Events'|trans }}</div>
+                <div class="qc-card-desc">{{ 'They go to the contact timeline in Notifuse and can start automations. Events about customer behaviour only with their consent to analytics cookies.'|trans }}</div>
+            </div>
+        </div>
+        <div class="qc-card-body qc-stack">
+            <div class="qc-table-wrap">
+                <table class="qc-table">
+                    <thead>
+                        <tr>
+                            <th>{{ 'Event'|trans }}</th>
+                            <th>{{ 'When'|trans }}</th>
+                            <th style="text-align:right">{{ 'Send'|trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for nazwa, wlaczone in zdarzenia %}
+                            <tr>
+                                <td><strong>{{ nazwyZdarzen[nazwa][0] }}</strong><div class="qc-muted"><code>{{ nazwa }}</code></div></td>
+                                <td>{{ nazwyZdarzen[nazwa][1] }}</td>
+                                <td style="text-align:right">
+                                    <label class="qc-toggle">
+                                        <input type="checkbox" name="EVENTS[{{ nazwa }}]" value="1"{{ wlaczone ? ' checked' }}
+                                               aria-label="{{ nazwyZdarzen[nazwa][0] }}">
+                                        <span class="qc-toggle-track"></span>
+                                    </label>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="qc-form-grid qc-form-grid-2">
+                <div class="qc-field">
+                    <label class="qc-label" for="q-nf-abandon">{{ 'Cart abandoned after (minutes)'|trans }}</label>
+                    <input type="number" class="qc-field-base qc-focusable" id="q-nf-abandon" name="ABANDON_MINUTES"
+                           value="{{ u.ABANDON_MINUTES }}" min="15" max="10080" step="15" style="inline-size:120px">
+                </div>
+                <div class="qc-field">
+                    <label class="qc-label" for="q-nf-image">{{ 'Product picture in the event'|trans }}</label>
+                    <div class="qc-select-wrap" style="max-inline-size:320px">
+                        <select id="q-nf-image" name="IMAGE_TYPE" class="qc-field-base qc-select qc-focusable">
+                            {% for typ in typyZdjec %}
+                                <option value="{{ typ.name }}"{{ u.IMAGE_TYPE == typ.name ? ' selected' }}>{{ typ.name }} ({{ typ.width }} × {{ typ.height }})</option>
+                            {% endfor %}
+                        </select>
+                        {{ icons.icon('chevronDown', 14, 'qc-select-chevron') }}
+                    </div>
+                    <div class="qc-hint">{{ 'The size an email with the cart or with a viewed product shows.'|trans }}</div>
+                </div>
+            </div>
+
+            <div>
+                <button type="submit" form="quince-notifuse-test-event" class="qc-btn qc-btn-outline"{{ polaczenieUstawione ? '' : ' disabled' }}>{{ 'Send a test event'|trans }}</button>
+            </div>
+        </div>
+    </div>
+
+    {# ── Ostatnio oglądane ── #}
+    <div class="qc-card">
+        <div class="qc-card-head">
+            <div>
+                <div class="qc-card-title">{{ 'Recently viewed on the contact'|trans }}</div>
+                <div class="qc-card-desc">{{ 'A list of recently viewed products saved on the contact card in Notifuse. A newsletter template can show it to each recipient.'|trans }}</div>
+            </div>
+        </div>
+        <div class="qc-card-body">
+            <div class="qc-form-grid qc-form-grid-2">
+                <div class="qc-field">
+                    <label class="qc-label">{{ 'Save the list'|trans }}</label>
+                    <label class="qc-toggle">
+                        <input type="checkbox" name="RECENT" value="1"{{ u.RECENT == '1' ? ' checked' }}>
+                        <span class="qc-toggle-track"></span>
+                        <span class="qc-toggle-text">{{ 'On'|trans }}</span>
+                    </label>
+                    <div class="qc-hint">{{ 'Only for customers who agreed to analytics cookies.'|trans }}</div>
+                </div>
+                <div class="qc-field">
+                    <label class="qc-label" for="q-nf-recent-field">{{ 'Field in Notifuse'|trans }}</label>
+                    <div class="qc-select-wrap" style="max-inline-size:320px">
+                        <select id="q-nf-recent-field" name="RECENT_FIELD" class="qc-field-base qc-select qc-focusable">
+                            {% for pole in polaJson %}
+                                <option value="{{ pole }}"{{ u.RECENT_FIELD == pole ? ' selected' }}>{{ pole }}</option>
+                            {% endfor %}
+                        </select>
+                        {{ icons.icon('chevronDown', 14, 'qc-select-chevron') }}
+                    </div>
+                    <div class="qc-hint">{{ 'A field nothing else uses. Saving overwrites what is in it.'|trans }}</div>
+                </div>
+                <div class="qc-field">
+                    <label class="qc-label" for="q-nf-recent-count">{{ 'Number of products'|trans }}</label>
+                    <input type="number" class="qc-field-base qc-focusable" id="q-nf-recent-count" name="RECENT_COUNT"
+                           value="{{ u.RECENT_COUNT }}" min="1" max="20" style="inline-size:120px">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# ── Błędy wysyłki ── #}
+    <div class="qc-card">
+        <div class="qc-card-head">
+            <div>
+                <div class="qc-card-title">{{ 'When Notifuse does not respond'|trans }}</div>
+                <div class="qc-card-desc">{{ 'Checkout and registration keep working. The shop remembers what it did not send and tries again later.'|trans }}</div>
+            </div>
+        </div>
+        <div class="qc-card-body">
+            <div class="qc-form-grid qc-form-grid-2">
+                <div class="qc-field">
+                    <label class="qc-label">{{ 'If sending stops working'|trans }}</label>
+                    <label class="qc-toggle">
+                        <input type="checkbox" name="ALERT" value="1"{{ u.ALERT == '1' ? ' checked' }}>
+                        <span class="qc-toggle-track"></span>
+                        <span class="qc-toggle-text">{{ 'Email me'|trans }}</span>
+                    </label>
+                    <div class="qc-hint">{{ 'One message a day at most, to the shop address.'|trans }}</div>
+                </div>
+                <div class="qc-field">
+                    <label class="qc-label">{{ 'Sending from the cron'|trans }}</label>
+                    <div class="qc-hint" style="margin:0">
+                        {{ 'PrestaShop has no clock of its own. Call this address from the server cron every 5 minutes:'|trans }}
+                        <code style="word-break:break-all">{{ cronUrl }}</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

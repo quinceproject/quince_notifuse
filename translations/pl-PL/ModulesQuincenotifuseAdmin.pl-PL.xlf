@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en-US" target-language="pl-PL" datatype="plaintext" original="ModulesQuincenotifuseAdmin">
+    <body>
+      <trans-unit id="quince.notifuse.001">
+        <source>A cart with an email address stays without an order longer than the time below.</source>
+        <target>Koszyk z adresem e-mail zostaje bez zamówienia dłużej niż czas poniżej.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.002">
+        <source>A customer creates an account in the shop.</source>
+        <target>Klient zakłada konto w sklepie.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.003">
+        <source>A customer places an order in the shop. Stops the cart reminders.</source>
+        <target>Klient składa zamówienie w sklepie. Zatrzymuje przypomnienia o koszyku.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.004">
+        <source>A customer who signs up in the shop goes to the list in their language. Notifuse sends them an email asking to confirm the sign-up.</source>
+        <target>Klient zapisany w sklepie trafia na listę w swoim języku. Notifuse wysyła mu mail z prośbą o potwierdzenie zapisu.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.005">
+        <source>A field nothing else uses. Saving overwrites what is in it.</source>
+        <target>Pole, z którego nic innego nie korzysta. Zapis nadpisuje jego zawartość.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.006">
+        <source>A list of recently viewed products saved on the contact card in Notifuse. A newsletter template can show it to each recipient.</source>
+        <target>Lista ostatnio oglądanych produktów zapisana na karcie kontaktu w Notifuse. Szablon newslettera może ją pokazać każdemu odbiorcy.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.007">
+        <source>A product the customer has in favourites or in an open cart gets cheaper. Works with Quince Omnibus.</source>
+        <target>Produkt, który klient ma w ulubionych albo w otwartym koszyku, tanieje. Działa z modułem Quince Omnibus.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.008">
+        <source>A product the customer has in favourites or in an open cart is back in stock. Not sent to customers who signed up for the shop's own stock alert.</source>
+        <target>Produkt, który klient ma w ulubionych albo w otwartym koszyku, wraca do sprzedaży. Nie idzie do klientów zapisanych na powiadomienie o dostępności w sklepie.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.009">
+        <source>A signed-in customer adds a product to the favourites list.</source>
+        <target>Zalogowany klient dodaje produkt do ulubionych.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.010">
+        <source>A signed-in customer, or one who came from an email link, adds a product to the cart.</source>
+        <target>Klient zalogowany albo taki, który przyszedł z linku w mailu, dodaje produkt do koszyka.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.011">
+        <source>A signed-in customer, or one who came from an email link, opens a product page. After signing in, the shop also sends the products viewed earlier in this browser.</source>
+        <target>Klient zalogowany albo taki, który przyszedł z linku w mailu, otwiera kartę produktu. Po zalogowaniu sklep wysyła też produkty obejrzane wcześniej w tej przeglądarce.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.012">
+        <source>API key</source>
+        <target>Klucz API</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.013">
+        <source>Abandoned cart</source>
+        <target>Porzucony koszyk</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.014">
+        <source>Added to cart</source>
+        <target>Dodanie do koszyka</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.015">
+        <source>Added to favourites</source>
+        <target>Dodanie do ulubionych</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.016">
+        <source>All</source>
+        <target>Wszystkie</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.017">
+        <source>An order gets a status marked as shipped in the shop. With the tracking number.</source>
+        <target>Zamówienie dostaje status oznaczony w sklepie jako wysłany. Z numerem przesyłki.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.018">
+        <source>Attempts</source>
+        <target>Próby</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.019">
+        <source>Back in stock</source>
+        <target>Powrót do sprzedaży</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.020">
+        <source>Cart abandoned after (minutes)</source>
+        <target>Koszyk porzucony po (minuty)</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.021">
+        <source>Check the connection</source>
+        <target>Sprawdź połączenie</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.022">
+        <source>Checkout and registration keep working. The shop remembers what it did not send and tries again later.</source>
+        <target>Kasa i rejestracja działają dalej. Sklep pamięta, czego nie wysłał, i próbuje ponownie później.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.023">
+        <source>Clear</source>
+        <target>Wyczyść</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.024">
+        <source>Connected to workspace &lt;strong&gt;%workspace%&lt;/strong&gt;.</source>
+        <target>Połączono z obszarem roboczym &lt;strong&gt;%workspace%&lt;/strong&gt;.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.025">
+        <source>Connection to Notifuse</source>
+        <target>Połączenie z Notifuse</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.026">
+        <source>Contact</source>
+        <target>Kontakt</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.027">
+        <source>Create the API key in Notifuse under Settings → API Keys, with read and write access to contacts and lists.</source>
+        <target>Klucz API utworzysz w Notifuse w Settings → API Keys, z odczytem i zapisem kontaktów i list.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.028">
+        <source>Details</source>
+        <target>Szczegóły</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.029">
+        <source>Do not sign up</source>
+        <target>Nie zapisuj</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.030">
+        <source>Email</source>
+        <target>E-mail</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.031">
+        <source>Email me</source>
+        <target>Wyślij mi maila</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.032">
+        <source>Email…</source>
+        <target>E-mail…</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.033">
+        <source>Event</source>
+        <target>Zdarzenie</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.034">
+        <source>Events</source>
+        <target>Zdarzenia</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.035">
+        <source>Failed</source>
+        <target>Nieudane</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.036">
+        <source>Field in Notifuse</source>
+        <target>Pole w Notifuse</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.037">
+        <source>Filter</source>
+        <target>Filtruj</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.038">
+        <source>From</source>
+        <target>Od</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.039">
+        <source>If sending stops working</source>
+        <target>Gdy wysyłka przestanie działać</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.040">
+        <source>Information</source>
+        <target>Informacje</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.041">
+        <source>Invalid security token, please try again.</source>
+        <target>Nieprawidłowy token bezpieczeństwa, spróbuj ponownie.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.042">
+        <source>Last answer from Notifuse</source>
+        <target>Ostatnia odpowiedź Notifuse</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.043">
+        <source>Leave it empty to keep the saved key.</source>
+        <target>Zostaw puste, żeby zachować zapisany klucz.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.044">
+        <source>List &lt;strong&gt;%list%&lt;/strong&gt; does not ask to confirm the sign-up. In Notifuse turn on "Double opt-in" and make the list public.</source>
+        <target>Lista &lt;strong&gt;%list%&lt;/strong&gt; nie prosi o potwierdzenie zapisu. W Notifuse włącz „Double opt-in” i ustaw listę jako publiczną.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.045">
+        <source>List &lt;strong&gt;%list%&lt;/strong&gt; no longer exists in Notifuse. Choose another one.</source>
+        <target>Listy &lt;strong&gt;%list%&lt;/strong&gt; nie ma już w Notifuse. Wybierz inną.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.046">
+        <source>List in Notifuse</source>
+        <target>Lista w Notifuse</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.047">
+        <source>List sign-up</source>
+        <target>Zapis na listę</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.048">
+        <source>List status</source>
+        <target>Status na liście</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.049">
+        <source>Log</source>
+        <target>Dziennik</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.050">
+        <source>Newsletter</source>
+        <target>Newsletter</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.051">
+        <source>Next attempt</source>
+        <target>Następna próba</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.052">
+        <source>Not set</source>
+        <target>Nieustawione</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.053">
+        <source>Not set yet</source>
+        <target>Jeszcze nieustawione</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.054">
+        <source>Nothing matches these filters.</source>
+        <target>Nic nie pasuje do tych filtrów.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.055">
+        <source>Notifuse address</source>
+        <target>Adres Notifuse</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.056">
+        <source>Notifuse did not accept it. The reason is below.</source>
+        <target>Notifuse tego nie przyjął. Powód poniżej.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.057">
+        <source>Notifuse did not accept the connection: %error%</source>
+        <target>Notifuse nie przyjął połączenia: %error%</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.058">
+        <source>Notifuse records where a customer came from and which pages they went through: for customers from an email link and for signed-in customers.</source>
+        <target>Notifuse zapisuje, skąd klient przyszedł i przez które strony przeszedł: dla klientów z linku w mailu i dla zalogowanych.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.059">
+        <source>Number of products</source>
+        <target>Liczba produktów</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.060">
+        <source>On</source>
+        <target>Włączone</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.061">
+        <source>One message a day at most, to the shop address.</source>
+        <target>Najwyżej jedna wiadomość dziennie, na adres sklepu.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.062">
+        <source>Only for customers who agreed to analytics cookies.</source>
+        <target>Tylko dla klientów, którzy zgodzili się na ciasteczka analityczne.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.063">
+        <source>Only for customers who agreed to analytics cookies. In Notifuse turn on Web Analytics, add the shop domain to the allowed ones and turn on identifying customers from email links.</source>
+        <target>Tylko dla klientów, którzy zgodzili się na ciasteczka analityczne. W Notifuse włącz Web Analytics, dodaj domenę sklepu do dozwolonych i włącz rozpoznawanie klientów z linków w mailach.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.064">
+        <source>Order</source>
+        <target>Zamówienie</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.065">
+        <source>Order shipped</source>
+        <target>Zamówienie wysłane</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.066">
+        <source>Page %page% of %pages%, %total% entries</source>
+        <target>Strona %page% z %pages%, wpisów: %total%</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.067">
+        <source>Passes contacts, newsletter sign-ups and shop events to Notifuse.</source>
+        <target>Przekazuje do Notifuse kontakty, zapisy na newsletter i zdarzenia ze sklepu.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.068">
+        <source>PrestaShop has no clock of its own. Call this address from the server cron every 5 minutes:</source>
+        <target>PrestaShop nie ma własnego zegara. Wywołuj ten adres z crona serwera co 5 minut:</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.069">
+        <source>Price drop</source>
+        <target>Spadek ceny</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.070">
+        <source>Product picture in the event</source>
+        <target>Zdjęcie produktu w zdarzeniu</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.071">
+        <source>Product viewed</source>
+        <target>Obejrzany produkt</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.072">
+        <source>Quince Notifuse</source>
+        <target>Quince Notifuse</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.073">
+        <source>Recently viewed on the contact</source>
+        <target>Ostatnio oglądane na kontakcie</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.074">
+        <source>Registration</source>
+        <target>Rejestracja</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.075">
+        <source>Remove the saved secret</source>
+        <target>Usuń zapisany sekret</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.076">
+        <source>Retry</source>
+        <target>Ponów</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.077">
+        <source>Save</source>
+        <target>Zapisz</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.078">
+        <source>Save the list</source>
+        <target>Zapisz listę</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.079">
+        <source>Saves the settings of this shop.</source>
+        <target>Zapisuje ustawienia tego sklepu.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.080">
+        <source>Send</source>
+        <target>Wyślij</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.081">
+        <source>Send a test event</source>
+        <target>Wyślij zdarzenie testowe</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.082">
+        <source>Send now</source>
+        <target>Wyślij teraz</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.083">
+        <source>Sending from the cron</source>
+        <target>Wysyłka z crona</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.084">
+        <source>Sending to Notifuse is failing on %shop%</source>
+        <target>Wysyłka do Notifuse nie działa w sklepie %shop%</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.085">
+        <source>Sent</source>
+        <target>Wysłane</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.086">
+        <source>Sent.</source>
+        <target>Wysłano.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.087">
+        <source>Settings</source>
+        <target>Ustawienia</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.088">
+        <source>Settings saved.</source>
+        <target>Ustawienia zapisane.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.089">
+        <source>Shop language</source>
+        <target>Język sklepu</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.090">
+        <source>Status</source>
+        <target>Status</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.091">
+        <source>Submitted</source>
+        <target>Zgłoszone</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.092">
+        <source>The address you sign in to Notifuse at.</source>
+        <target>Adres, pod którym logujesz się do Notifuse.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.093">
+        <source>The identifier from the Notifuse panel address, after /workspace/.</source>
+        <target>Identyfikator z adresu panelu Notifuse, po /workspace/.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.094">
+        <source>The lists appear here once the shop connects to Notifuse.</source>
+        <target>Listy pojawią się tutaj, gdy sklep połączy się z Notifuse.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.095">
+        <source>The shop also asks to confirm the sign-up (Newsletter subscription module, verification email). Turn it off there, or the customer gets two emails.</source>
+        <target>Sklep też prosi o potwierdzenie zapisu (moduł Zapis na newsletter, mail weryfikacyjny). Wyłącz to tam, inaczej klient dostanie dwa maile.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.096">
+        <source>The shop passes contacts, newsletter sign-ups and events to Notifuse. Automations in Notifuse decide whether a customer gets an email.</source>
+        <target>Sklep przekazuje do Notifuse kontakty, zapisy na newsletter i zdarzenia. O tym, czy klient dostanie maila, decydują automatyzacje w Notifuse.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.097">
+        <source>The size an email with the cart or with a viewed product shows.</source>
+        <target>Rozmiar zdjęcia w mailu z koszykiem albo z obejrzanym produktem.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.098">
+        <source>They go to the contact timeline in Notifuse and can start automations. Events about customer behaviour only with their consent to analytics cookies.</source>
+        <target>Trafiają na oś czasu kontaktu w Notifuse i mogą uruchamiać automatyzacje. Zdarzenia o zachowaniu klienta tylko za jego zgodą na ciasteczka analityczne.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.099">
+        <source>This entry is no longer in the log.</source>
+        <target>Tego wpisu nie ma już w dzienniku.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.100">
+        <source>To</source>
+        <target>Do</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.101">
+        <source>Uninstalling removes the settings and the log. Contacts already in Notifuse stay there.</source>
+        <target>Odinstalowanie usuwa ustawienia i dziennik. Kontakty, które są już w Notifuse, tam zostają.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.102">
+        <source>Visit tracking</source>
+        <target>Śledzenie odwiedzin</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.103">
+        <source>Visits to the shop</source>
+        <target>Odwiedziny w sklepie</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.104">
+        <source>Waiting</source>
+        <target>Oczekujące</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.105">
+        <source>Waiting to send</source>
+        <target>Czeka na wysłanie</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.106">
+        <source>What</source>
+        <target>Co</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.107">
+        <source>What the shop sends</source>
+        <target>Co wysyła sklep</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.108">
+        <source>When</source>
+        <target>Kiedy</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.109">
+        <source>When Notifuse does not respond</source>
+        <target>Gdy Notifuse nie odpowiada</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.110">
+        <source>Without the secret, visits of signed-in customers are recorded without a name. What the customer did in the shop reaches Notifuse anyway.</source>
+        <target>Bez sekretu odwiedziny zalogowanych klientów zapisują się bez nazwiska. To, co klient zrobił w sklepie, i tak trafia do Notifuse.</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.111">
+        <source>Workspace</source>
+        <target>Obszar roboczy</target>
+      </trans-unit>
+      <trans-unit id="quince.notifuse.112">
+        <source>Workspace secret</source>
+        <target>Sekret obszaru roboczego</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
